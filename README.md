@@ -2,6 +2,9 @@
 
 This is the project starter repo for the fourth course in the [Udacity Full Stack Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004): Server Deployment, Containerization, and Testing.
 
+IP address of the running application: aa5938abd5bae11eabad60a1f54c0e64-1526288372.us-west-2.elb.amazonaws.com
+[Click here](aa5938abd5bae11eabad60a1f54c0e64-1526288372.us-west-2.elb.amazonaws.com)
+
 In this project you will containerize and deploy a Flask API to a Kubernetes cluster using Docker, AWS EKS, CodePipeline, and CodeBuild.
 
 The Flask app that will be used for this project consists of a simple API with three endpoints:
@@ -11,6 +14,27 @@ The Flask app that will be used for this project consists of a simple API with t
 - `GET '/contents'`: This requires a valid JWT, and returns the un-encrpyted contents of that token. 
 
 The app relies on a secret set as the environment variable `JWT_SECRET` to produce a JWT. The built-in Flask server is adequate for local development, but not production, so you will be using the production-ready [Gunicorn](https://gunicorn.org/) server when deploying the app.
+
+### Testing endpoints after deployment:
+```
+export TOKEN=`curl -d '{"email":"janujaishree94@gmail.com","password":"123123"}' -H "Content-Type: application/json" -X POST aa5938abd5bae11eabad60a1f54c0e64-1526288372.us-west-2.elb.amazonaws.com/auth  | jq -r '.token'`
+```
+
+```
+curl --request GET 'aa5938abd5bae11eabad60a1f54c0e64-1526288372.us-west-2.elb.amazonaws.com/contents' -H "Authorization: Bearer ${TOKEN}" | jq
+```
+Return output as expected:
+
+```
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    71  100    71    0     0    159      0 --:--:-- --:--:-- --:--:--   158
+{
+  "email": "janujaishree94@gmail.com",
+  "exp": 1584273241,
+  "nbf": 1583063641
+}
+```
 
 ## Initial setup
 1. Fork this project to your Github account.
@@ -32,7 +56,7 @@ Completing the project involves several steps:
 2. Build and test the container locally
 3. Create an EKS cluster
 4. Store a secret using AWS Parameter Store
-5. Create a CodePipeline pipeline triggered by github 
+5. Create a CodePipeline pipeline triggered by github checkins
 6. Create a CodeBuild stage which will build, test, and deploy 
 
 For more detail about each of these steps, see the project lesson [here](https://classroom.udacity.com/nanodegrees/nd004/parts/1d842ebf-5b10-4749-9e5e-ef28fe98f173/modules/ac13842f-c841-4c1a-b284-b47899f4613d/lessons/becb2dac-c108-4143-8f6c-11b30413e28d/concepts/092cdb35-28f7-4145-b6e6-6278b8dd7527).
