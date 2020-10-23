@@ -1,6 +1,6 @@
 # Deploying a Flask API
 
-This is the project starter repo for the fourth course in the [Udacity Full Stack Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004): Server Deployment, Containerization, and Testing.
+Server Deployment, Containerization, and Testing.
 
 IP address of the running application: aa5938abd5bae11eabad60a1f54c0e64-1526288372.us-west-2.elb.amazonaws.com
 [Click here](aa5938abd5bae11eabad60a1f54c0e64-1526288372.us-west-2.elb.amazonaws.com)
